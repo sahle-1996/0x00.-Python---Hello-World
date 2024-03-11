@@ -1,3 +1,2 @@
-#!/bin/sh
-PYFILE=/alx-higher_level_programming/0x00-python-hello_world/main.py
+#!/bin/bash
 python3 $PYFILE
