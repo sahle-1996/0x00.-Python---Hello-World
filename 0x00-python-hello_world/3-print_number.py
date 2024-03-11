@@ -1,4 +1,4 @@
 #!/usr/bin/python3
 number = 98
-text = 'Battery street'
-print(f'{number} {text}\n')
+index = (f'{number} Battery street')
+print(index)
