@@ -1,4 +1,4 @@
-a = 89
-b = 10
+#!/usr/bin/python3
+a, b = 10, 89
 a, b = b, a
-print("a={} - b={}".format(a, b))
+print(f"a={a} - b={b}")
