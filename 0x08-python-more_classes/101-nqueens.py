@@ -1,80 +1,104 @@
 #!/usr/bin/python3
-"""10. N queens"""
-
 import sys
 
 
-def create_new_board(n):
-    """Function that creates a new nxn sized chessboard with 0's."""
-    board = [[' '] * n for _ in range(n)]
-    return board
+def init_board(n):
+    """Initialize an `n`x`n` sized chessboard with 0's."""
+    board = []
+    [board.append([]) for i in range(n)]
+    [row.append(' ') for i in range(n) for row in board]
+    return (board)
 
 
-def copy_board(board):
-    """Function that returns a deep copy of the board"""
-    return [row[:] for row in board]
+def board_deepcopy(board):
+    """Return a deepcopy of a chessboard."""
+    if isinstance(board, list):
+        return list(map(board_deepcopy, board))
+    return (board)
 
 
-def find_queen_positions(board):
-    """Function that finds the positions of the queens"""
-    queens_positions = []
-    for row in range(len(board)):
-        for col in range(len(board[row])):
-            if board[row][col] == "Q":
-                queens_positions.append((row, col))
-    return queens_positions
+def get_solution(board):
+    """Return the list of lists representation of a solved chessboard."""
+    solution = []
+    for r in range(len(board)):
+        for c in range(len(board)):
+            if board[r][c] == "Q":
+                solution.append([r, c])
+                break
+    return (solution)
 
 
-def mark_invalid_moves(board, row, col):
-    """Function that marks invalid moves for a queen"""
-    n = len(board)
-    for r in range(n):
-        board[r][col] = "x"  # Marking invalid moves in the same column
-        if 0 <= row + r < n:
-            board[row + r][col] = "x"  # Marking invalid moves in the same row
-            if 0 <= col + r < n:
-                board[row + r][col + r] = "x"  # Marking invalid moves in the diagonal (down-right)
-            if 0 <= col - r < n:
-                board[row + r][col - r] = "x"  # Marking invalid moves in the diagonal (down-left)
-        if 0 <= row - r < n:
-            board[row - r][col] = "x"  # Marking invalid moves in the same row
-            if 0 <= col + r < n:
-                board[row - r][col + r] = "x"  # Marking invalid moves in the diagonal (up-right)
-            if 0 <= col - r < n:
-                board[row - r][col - r] = "x"  # Marking invalid moves in the diagonal (up-left)
+def xout(board, row, col):
+    # X out all forward spots
+    for c in range(col + 1, len(board)):
+        board[row][c] = "x"
+    # X out all backwards spots
+    for c in range(col - 1, -1, -1):
+        board[row][c] = "x"
+    # X out all spots below
+    for r in range(row + 1, len(board)):
+        board[r][col] = "x"
+    # X out all spots above
+    for r in range(row - 1, -1, -1):
+        board[r][col] = "x"
+    # X out all spots diagonally down to the right
+    c = col + 1
+    for r in range(row + 1, len(board)):
+        if c >= len(board):
+            break
+        board[r][c] = "x"
+        c += 1
+    # X out all spots diagonally up to the left
+    c = col - 1
+    for r in range(row - 1, -1, -1):
+        if c < 0:
+            break
+        board[r][c]
+        c -= 1
+    # X out all spots diagonally up to the right
+    c = col + 1
+    for r in range(row - 1, -1, -1):
+        if c >= len(board):
+            break
+        board[r][c] = "x"
+        c += 1
+    # X out all spots diagonally down to the left
+    c = col - 1
+    for r in range(row + 1, len(board)):
+        if c < 0:
+            break
+        board[r][c] = "x"
+        c -= 1
 
 
-def solve_queens(board, row, queens, solutions):
-    """Function that solves the puzzle with backtracking"""
+def recursive_solve(board, row, queens, solutions):
     if queens == len(board):
-        solutions.append(find_queen_positions(board))
-        return solutions
+        solutions.append(get_solution(board))
+        return (solutions)
 
-    for col in range(len(board[row])):
-        if board[row][col] == " ":
-            tmp_board = copy_board(board)
-            tmp_board[row][col] = "Q"
-            mark_invalid_moves(tmp_board, row, col)
-            solutions = solve_queens(tmp_board, row + 1, queens + 1, solutions)
+    for c in range(len(board)):
+        if board[row][c] == " ":
+            tmp_board = board_deepcopy(board)
+            tmp_board[row][c] = "Q"
+            xout(tmp_board, row, c)
+            solutions = recursive_solve(tmp_board, row + 1,
+                                        queens + 1, solutions)
 
-    return solutions
+    return (solutions)
 
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
         print("Usage: nqueens N")
         sys.exit(1)
-
-    if not sys.argv[1].isdigit():
+    if sys.argv[1].isdigit() is False:
         print("N must be a number")
         sys.exit(1)
-
-    n = int(sys.argv[1])
-    if n < 4:
+    if int(sys.argv[1]) < 4:
         print("N must be at least 4")
         sys.exit(1)
 
-    board = create_new_board(n)
-    methods = solve_queens(board, 0, 0, [])
-    for sol in methods:
+    board = init_board(int(sys.argv[1]))
+    solutions = recursive_solve(board, 0, 0, [])
+    for sol in solutions:
         print(sol)
