@@ -1,29 +1,31 @@
-def test_max_integer():
+#!/usr/bin/python3
+"""Tests for the text_indentation function."""
+
+import doctest
+
+def test_text_indentation():
     """
-    Test cases for the max_integer function.
-
-    >>> max_integer([1, 2, 3, 4, 5])
-    5
-
-    >>> max_integer([-5, -4, -3, -2, -1])
-    -1
-
-    >>> max_integer([])
-    None
-
-    >>> max_integer([10])
-    10
-
-    >>> max_integer([0, 0, 0, 0])
-    0
-
-    >>> max_integer(["a", "b", "c"])
-    Traceback (most recent call last):
-        ...
-    TypeError: '>' not supported between instances of 'str' and 'int'
+    Test cases for text_indentation function.
+    >>> text_indentation("Hello. How are you?")
+    Hello.
+    
+    How are you?
+    
+    >>> text_indentation("This is a test sentence.")
+    This is a test sentence.
+    
+    >>> text_indentation("A question? Sure.")
+    A question?
+    
+    Sure.
+    
+    >>> text_indentation("Multiple?? Periods... Here!")
+    Multiple?
+    
+    Periods...
+    
+    Here!
     """
-    pass
 
 if __name__ == "__main__":
-    import doctest
     doctest.testmod()
