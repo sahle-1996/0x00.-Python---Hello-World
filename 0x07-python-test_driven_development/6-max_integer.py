@@ -1,19 +1,24 @@
 #!/usr/bin/python3
-"""Module to find the max integer in a list"""
+"""4. Text indentation"""
 
 
-def max_integer(list_=None):
-    """Function to find and return the max integer in a list of integers
-        If the list is empty, the function returns None
+def text_indentation(text):
     """
-    if list_ is None:
-        list_ = []
-    if len(list_) == 0:
-        return None
-    result = list_[0]
-    i = 1
-    while i < len(list_):
-        if list_[i] > result:
-            result = list_[i]
-        i += 1
-    return result
+    Function that prints a text with 2 new lines after each
+    of these characters: ., ? and :
+    """
+
+    if not isinstance(text, str):
+        raise TypeError("text must be a string")
+
+    txt = text[:]
+
+    for char in ".?:":
+        list_text = txt.split(char)
+        txt = ""
+
+        for elem in list_text:
+            elem = elem.strip(" ")
+            txt = elem + char if txt == "" else txt + "\n\n" + elem + char
+
+    print(txt[:-3], end="")
