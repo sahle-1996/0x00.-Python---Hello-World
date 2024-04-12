@@ -1,0 +1,34 @@
+def test_text_indentation():
+    """
+    Test cases for the text_indentation function.
+
+    >>> text_indentation("Hello. How are you?")
+    Hello.
+    
+    How are you?
+
+    >>> text_indentation("This is a test sentence. This is another test sentence.")
+    This is a test sentence.
+    
+    This is another test sentence.
+
+    >>> text_indentation("One question? Two questions!! Three questions?")
+    One question?
+    
+    Two questions!!
+    
+    Three questions?
+
+    >>> text_indentation("No punctuation at all")
+    No punctuation at all
+
+    >>> text_indentation(123)
+    Traceback (most recent call last):
+        ...
+    TypeError: text must be a string
+    """
+    pass
+
+if __name__ == "__main__":
+    import doctest
+    doctest.testmod()
