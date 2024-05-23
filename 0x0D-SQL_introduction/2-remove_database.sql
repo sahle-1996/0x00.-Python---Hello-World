@@ -1,2 +1,2 @@
--- Ensures absence of a database
-DROP SCHEMA IF EXISTS hbtc_0c_0;
+-- Script to remove the database
+DROP SCHEMA IF EXISTS hbtn_0c_0;
