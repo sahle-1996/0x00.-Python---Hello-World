@@ -1,2 +1,4 @@
--- Command to display all records of the table second_table from the database hbtn_0c_0
-SELECT name, score FROM second_table ORDER BY score DESC;
+-- Prints the sorted database, ordering by score in descending order and then by name in ascending order
+SELECT score, name 
+FROM second_table 
+ORDER BY 1 DESC, 2 ASC;
