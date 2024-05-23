@@ -1,9 +1,2 @@
--- Script to create the database hbtn_0d_usa and the table cities
-CREATE DATABASE IF NOT EXISTS hbtn_0d_usa;
-USE hbtn_0d_usa;
-CREATE TABLE IF NOT EXISTS cities (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    state_id INT NOT NULL,
-    name VARCHAR(256) NOT NULL,
-    FOREIGN KEY (state_id) REFERENCES (SELECT id FROM states)
-);
+-- Script to insert into the table first_table.
+INSERT INTO first_table (id, name) VALUES (89, 'BEST SCHOOL');
