@@ -1,2 +1,2 @@
--- Command to display the full description of the table first_table from the database
+-- Describe a table
 DESCRIBE first_table;
