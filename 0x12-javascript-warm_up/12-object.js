@@ -1,11 +1,12 @@
 #!/usr/bin/node
 
-const item = {
-  kind: 'object',
-  quantity: 12
+const obj = {
+  item: 'object',
+  amount: 12
 };
-console.log(item);
 
-item['quantity'] = 89;
+console.log(obj);
 
-console.log(item);
+obj['amount'] = 89;
+
+console.log(obj);
