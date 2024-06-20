@@ -1,4 +1,16 @@
 #!/usr/bin/node
 
-const number = parseInt(process.argv[2]);
-console.log(Number.isNaN(number) ? 'Not a number' : `My number: ${number}`);
+class Rectangle {
+  constructor(w, h) {
+    this.width = w > 0 ? w : 0;
+    this.height = h > 0 ? h : 0;
+  }
+}
+
+class Square extends Rectangle {
+  constructor(size) {
+    super(size, size);
+  }
+}
+
+module.exports = Square;
