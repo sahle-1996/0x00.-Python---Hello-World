@@ -1,6 +1,6 @@
 #!/usr/bin/node
 
-const args = process.argv.slice(2);
-const num = +args[0];
+const value = parseFloat(process.argv[2]);
+const integer = Number.isNaN(value) ? NaN : Math.trunc(value);
 
-console.log(isNaN(num) ? 'Not a number' : `My number: ${num}`);
+console.log(Number.isNaN(integer) ? 'Not a number' : `My number: ${integer}`);
