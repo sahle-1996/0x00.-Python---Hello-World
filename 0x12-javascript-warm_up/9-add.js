@@ -1,8 +1,7 @@
 #!/usr/bin/node
 
-const sum = (x, y) => x + y;
+const sum = (a, b) => a + b;
 
-const a = parseInt(process.argv[2]);
-const b = parseInt(process.argv[3]);
+const args = process.argv.slice(2).map(Number);
 
-console.log(sum(a, b));
+console.log(sum(...args));
