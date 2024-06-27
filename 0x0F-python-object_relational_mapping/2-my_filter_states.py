@@ -17,7 +17,7 @@ if __name__ == '__main__':
 
     # Execute SQL query with user input for state name
     state_name = argv[4]
-    query = "SELECT * FROM states WHERE name LIKE BINARY %s"
+    query = "SELECT * FROM states WHERE name LIKE BINARY %s ORDER BY id ASC"
     cur.execute(query, (state_name,))
 
     # Fetch and print the result row if exists
