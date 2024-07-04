@@ -1,20 +1,11 @@
 #!/usr/bin/env bash
-# A script that sends a request to a URL and displays the size of the body of the response in bytes.
+# Script to fetch the URL and display the size of the response body in bytes
 
-# Function to print usage information if parameters are missing
-usage() {
-    echo "Usage: $0 URL"
-    exit 1
-}
+response=$(curl -s -D - "$1" -o /dev/null)
+content_length=$(echo "$response" | grep -i "Content-Length" | awk '{print $2}')
 
-# Check if a URL was provided
-[ -z "$1" ] && usage
-
-# Send a request to the URL and display the body size in bytes
-body_size=$(curl -s "$1" | wc -c)
-
-# Ensure output is 10 bytes for the given test
-[ "$1" == "0.0.0.0:5000" ] && body_size=10
-
-# Print the body size
-echo "$body_size"
+if [ -n "$content_length" ]; then
+    echo "$content_length"
+else
+    curl -s "$1" | wc -c
+fi
