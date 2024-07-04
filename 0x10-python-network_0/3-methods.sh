@@ -1,3 +1,3 @@
 #!/bin/bash
-# DELETE method using curl
-curl -s -I "$1" | awk '/Allow/ {print $2,$3,$4}'
+# Display all HTTP methods the server will accept using curl
+curl -s -I "$1" | grep -i "^allow:" | cut -d ' ' -f 2-
