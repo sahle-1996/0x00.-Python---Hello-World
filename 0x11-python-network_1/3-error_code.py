@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Script to fetch and display content from a URL.
+Fetch and display the body of a URL's response.
 """
 
 if __name__ == "__main__":
@@ -11,6 +11,7 @@ if __name__ == "__main__":
 
     try:
         with request.urlopen(url) as response:
-            print(response.read().decode('utf-8'))
-    except error.HTTPError as e:
-        print('Error code:', e.code)
+            body = response.read().decode('utf-8')
+            print(body)
+    except error.HTTPError as http_err:
+        print("Error code:", http_err.code)
